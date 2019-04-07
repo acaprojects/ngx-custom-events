@@ -8,7 +8,7 @@ import { NgModule, Type } from '@angular/core';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 
 import { TappedDirective } from './directives/tapped.directive';
-import { CustomEventsPlugin } from './services/custom-event.service';
+// import { CustomEventsPlugin } from './services/custom-event.service';
 
 import { LIBRARY_SETTINGS } from './settings';
 

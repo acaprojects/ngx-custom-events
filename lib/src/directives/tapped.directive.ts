@@ -6,18 +6,18 @@ import {
     AfterViewInit,
     OnDestroy
 } from '@angular/core';
-import { CUSTOM_EVENT_LIST } from '../services/custom-event.service';
+// import { CUSTOM_EVENT_LIST } from '../services/custom-event.service';
 
-CUSTOM_EVENT_LIST.push({
-    id: 'tapped',
-    add: (e, cb) => TappedDirective.add(e, cb),
-    remove: (e, cb) => TappedDirective.remove(e, cb)
-});
-CUSTOM_EVENT_LIST.push({
-    id: 'touchrelease',
-    add: (e, cb) => TappedDirective.add(e, cb),
-    remove: (e, cb) => TappedDirective.remove(e, cb)
-});
+// CUSTOM_EVENT_LIST.push({
+//     id: 'tapped',
+//     add: (e, cb) => TappedDirective.add(e, cb),
+//     remove: (e, cb) => TappedDirective.remove(e, cb)
+// });
+// CUSTOM_EVENT_LIST.push({
+//     id: 'touchrelease',
+//     add: (e, cb) => TappedDirective.add(e, cb),
+//     remove: (e, cb) => TappedDirective.remove(e, cb)
+// });
 
 @Directive({
     selector: '[tapped] , [touchrelease]',
