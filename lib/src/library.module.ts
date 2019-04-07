@@ -24,14 +24,14 @@ const DIRECTIVES: Type<any>[] = [TappedDirective];
         ...DIRECTIVES
     ],
     imports: [CommonModule],
-    providers: [
-        {
-            provide: EVENT_MANAGER_PLUGINS,
-            useClass: CustomEventsPlugin,
-            multi: true,
-            deps: [DOCUMENT, Console]
-        }
-    ],
+    // providers: [
+    //     {
+    //         provide: EVENT_MANAGER_PLUGINS,
+    //         useClass: CustomEventsPlugin,
+    //         multi: true,
+    //         deps: [DOCUMENT, Console]
+    //     }
+    // ],
     exports: [
         // ...COMPONENTS,
         ...DIRECTIVES

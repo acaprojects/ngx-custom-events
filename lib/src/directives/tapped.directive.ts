@@ -55,6 +55,7 @@ export class TappedDirective implements AfterViewInit, OnDestroy {
                 'touchrelease',
                 e => this.handleEvent(e)
             );
+            TappedDirective.add(this.el.nativeElement);
         }
     }
 
@@ -67,6 +68,7 @@ export class TappedDirective implements AfterViewInit, OnDestroy {
             this._touchrelease_listen();
             this._touchrelease_listen = null;
         }
+        TappedDirective.remove(this.el.nativeElement);
     }
 
     /**
