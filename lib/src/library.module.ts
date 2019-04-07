@@ -3,36 +3,34 @@
  * @Email:  alex@yuion.net
  */
 
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { NgModule, Type } from '@angular/core';
-import { FormsModule } from '@angular/forms'
-import { ScrollingModule } from '@angular/cdk/scrolling';
-import { OverlayModule } from '@acaprojects/ngx-overlays';
+import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 
-import { DropdownComponent } from './components/dropdown/dropdown.component';
-import { CustomDropdownComponent } from './components/custom-dropdown/custom-dropdown.component';
+import { CustomEventsPlugin } from './services/custom-event.service';
 
 import { LIBRARY_SETTINGS } from './settings';
 
 import * as day_api from 'dayjs';
 const dayjs = day_api;
 
-const COMPONENTS: Type<any>[] = [
-    DropdownComponent,
-    CustomDropdownComponent
-];
+const COMPONENTS: Type<any>[] = [];
 
 @NgModule({
     declarations: [
-        ...COMPONENTS
+        // ...COMPONENTS,
     ],
-    imports: [
-        CommonModule,
-        FormsModule,
-        ScrollingModule
+    imports: [CommonModule],
+    providers: [
+        {
+            provide: EVENT_MANAGER_PLUGINS,
+            useClass: CustomEventsPlugin,
+            multi: true,
+            deps: [DOCUMENT, Console]
+        }
     ],
     exports: [
-        ...COMPONENTS
+        // ...COMPONENTS,
     ]
 })
 class LibraryModule {
@@ -44,7 +42,9 @@ class LibraryModule {
         if (!LibraryModule.init) {
             const now = dayjs();
             LibraryModule.init = true;
-            const build = now.isSame(this.build, 'd') ? `Today at ${this.build.format('h:mmA')}` : this.build.format('D MMM YYYY, h:mmA');
+            const build = now.isSame(this.build, 'd')
+                ? `Today at ${this.build.format('h:mmA')}`
+                : this.build.format('D MMM YYYY, h:mmA');
             LIBRARY_SETTINGS.version(LibraryModule.version, build);
         }
     }
