@@ -1,5 +1,4 @@
-import { Component, ViewContainerRef, ViewEncapsulation, OnInit, ViewChild } from '@angular/core';
-import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { Component, ViewContainerRef, ViewEncapsulation, OnInit } from '@angular/core';
 
 import { AppService } from './services/app.service';
 
@@ -13,14 +12,14 @@ const dayjs = day_api;
     encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
-
     public model: { [name: string]: any } = {};
 
-    constructor(private view: ViewContainerRef, private service: AppService) {
-    }
+    constructor(private view: ViewContainerRef, private service: AppService) {}
 
-    public ngOnInit(): void {
-        
-    }
+    public ngOnInit(): void {}
 
+    public toggle() {
+        console.warn('Toggle');
+        this.model.test = !this.model.test;
+    }
 }
