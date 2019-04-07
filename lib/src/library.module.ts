@@ -16,6 +16,7 @@ import * as day_api from 'dayjs';
 const dayjs = day_api;
 
 const COMPONENTS: Type<any>[] = [];
+const DIRECTIVES: Type<any>[] = [TappedDirective];
 
 @NgModule({
     declarations: [
