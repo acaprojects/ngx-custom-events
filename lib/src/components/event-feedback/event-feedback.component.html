@@ -1,0 +1,10 @@
+<ng-content></ng-content>
+<div
+    [class]="'event-feedback' + (klass ? ' ' + klass : '')"
+    [style.top]="position.top"
+    [style.left]="position.left"
+    [style.height]="size + 'px'"
+    [style.width]="size + 'px'"
+    [class.show]="show"
+    [class.hide]="show === false"
+></div>

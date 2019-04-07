@@ -9,20 +9,18 @@ import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 
 import { TappedDirective } from './directives/tapped.directive';
 // import { CustomEventsPlugin } from './services/custom-event.service';
+import { EventFeedbackComponent } from './components/event-feedback/event-feedback.component';
 
 import { LIBRARY_SETTINGS } from './settings';
 
 import * as day_api from 'dayjs';
 const dayjs = day_api;
 
-const COMPONENTS: Type<any>[] = [];
+const COMPONENTS: Type<any>[] = [EventFeedbackComponent];
 const DIRECTIVES: Type<any>[] = [TappedDirective];
 
 @NgModule({
-    declarations: [
-        // ...COMPONENTS,
-        ...DIRECTIVES
-    ],
+    declarations: [...COMPONENTS, ...DIRECTIVES],
     imports: [CommonModule],
     // providers: [
     //     {
@@ -32,10 +30,7 @@ const DIRECTIVES: Type<any>[] = [TappedDirective];
     //         deps: [DOCUMENT, Console]
     //     }
     // ],
-    exports: [
-        // ...COMPONENTS,
-        ...DIRECTIVES
-    ]
+    exports: [...COMPONENTS, ...DIRECTIVES]
 })
 class LibraryModule {
     public static version = '0.2.0';
