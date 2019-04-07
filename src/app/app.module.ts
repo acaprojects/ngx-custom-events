@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { DropdownModule } from '../../lib/src/public_api';
+import { CustomEventsModule } from '../../lib/src/public_api';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
@@ -12,7 +12,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
   ],
   imports: [
     BrowserModule,
-    DropdownModule,
+    CustomEventsModule,
     BrowserAnimationsModule,
     ScrollingModule
   ],

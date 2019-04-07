@@ -22,7 +22,6 @@
     "dayjs": "^1.8.11"
   },
   "devDependencies": {
-    "@acaprojects/ngx-overlays": "^0.3.2",
     "@angular-devkit/build-angular": "~0.10.0",
     "@angular/animations": "^7.2.11",
     "@angular/cdk": "^7.3.6",

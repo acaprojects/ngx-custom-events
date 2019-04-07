@@ -29,8 +29,7 @@ const COMPONENTS: Type<any>[] = [
     imports: [
         CommonModule,
         FormsModule,
-        ScrollingModule,
-        OverlayModule
+        ScrollingModule
     ],
     exports: [
         ...COMPONENTS
