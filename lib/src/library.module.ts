@@ -7,6 +7,7 @@ import { CommonModule, DOCUMENT } from '@angular/common';
 import { NgModule, Type } from '@angular/core';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 
+import { TappedDirective } from './directives/tapped.directive';
 import { CustomEventsPlugin } from './services/custom-event.service';
 
 import { LIBRARY_SETTINGS } from './settings';
@@ -19,6 +20,7 @@ const COMPONENTS: Type<any>[] = [];
 @NgModule({
     declarations: [
         // ...COMPONENTS,
+        ...DIRECTIVES
     ],
     imports: [CommonModule],
     providers: [
@@ -31,6 +33,7 @@ const COMPONENTS: Type<any>[] = [];
     ],
     exports: [
         // ...COMPONENTS,
+        ...DIRECTIVES
     ]
 })
 class LibraryModule {
