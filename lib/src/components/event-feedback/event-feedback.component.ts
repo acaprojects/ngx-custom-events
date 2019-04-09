@@ -47,7 +47,7 @@ export class EventFeedbackComponent implements AfterViewInit, OnDestroy {
                     this.renderer.setStyle(el, 'overflow', 'hidden');
                 }
                 this.cached_box = el.getBoundingClientRect();
-                this.size = Math.ceil(Math.max(this.cached_box.height, this.cached_box.width) * 1.25);
+                this.size = Math.ceil(Math.max(this.cached_box.height, this.cached_box.width) * 1.5);
                 this.mouse_cancel = this.renderer.listen(el, 'mousedown', e => this.handleEvent(e));
                 this.touch_cancel = this.renderer.listen(el, 'touchstart', e => this.handleEvent(e));
             }
@@ -87,7 +87,7 @@ export class EventFeedbackComponent implements AfterViewInit, OnDestroy {
         this.show = true;
         if (!this.cached_box) {
             this.cached_box = this.element.nativeElement.getBoundingClientRect();
-            this.size = Math.ceil(Math.max(this.cached_box.height, this.cached_box.width) * 1.25);
+            this.size = Math.ceil(Math.max(this.cached_box.height, this.cached_box.width) * 1.5);
         }
         this.position = !this.center
             ? { top: `${center.y - this.cached_box.top}px`, left: `${center.x - this.cached_box.left}px` }
@@ -100,7 +100,7 @@ export class EventFeedbackComponent implements AfterViewInit, OnDestroy {
             if (this.cancelled) {
                 this.show = false;
             }
-        }, 250);
+        }, 350);
     }
 
     /**
