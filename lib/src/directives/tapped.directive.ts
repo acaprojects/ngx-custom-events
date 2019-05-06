@@ -88,8 +88,8 @@ export class TappedDirective implements AfterViewInit, OnDestroy {
      */
     public static handleHold(event: MouseEvent | TouchEvent, callback?: (e) => void) {
         const center = {
-            x: event instanceof MouseEvent ? event.clientX : event.touches[0].clientX,
-            y: event instanceof MouseEvent ? event.clientY : event.touches[0].clientY
+            x: event instanceof TouchEvent ? event.touches[0].clientX : event.clientX,
+            y: event instanceof TouchEvent ? event.touches[0].clientY : event.clientY
         };
         TappedDirective.start = center;
         event.target.addEventListener('mouseup', (e: any) => TappedDirective.handleRelease(e, callback));
@@ -110,11 +110,14 @@ export class TappedDirective implements AfterViewInit, OnDestroy {
             TappedDirective.timer = null;
         }
         TappedDirective.timer = <any>setTimeout(() => {
-            const center = {
-                x: event instanceof MouseEvent ? event.clientX : event.touches[0].clientX,
-                y: event instanceof MouseEvent ? event.clientY : event.touches[0].clientY
-            };
             const start = TappedDirective.start;
+            if (event instanceof TouchEvent && event.touches.length === 0) {
+                event = new MouseEvent('mouseup', { clientX: start.x, clientY: start.y });
+            }
+            const center = {
+                x: event instanceof TouchEvent ? event.touches[0].clientX : event.clientX,
+                y: event instanceof TouchEvent ? event.touches[0].clientY : event.clientY
+            };
             const distance = Math.sqrt(Math.pow(center.x - start.x, 2) + (center.y - start.y, 2));
             // Emit event if the distance is within the tolerence
             if (distance < TappedDirective.tolerance) {

@@ -33,9 +33,9 @@ const DIRECTIVES: Type<any>[] = [TappedDirective];
     exports: [...COMPONENTS, ...DIRECTIVES]
 })
 class LibraryModule {
-    public static version = '0.2.0';
+    public static version = '0.2.1';
     private static init = false;
-    private build = dayjs(1554641597000);
+    private build = dayjs(1557184675000);
 
     constructor() {
         if (!LibraryModule.init) {
