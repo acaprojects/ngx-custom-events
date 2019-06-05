@@ -1,7 +1,23 @@
-# Angular 7+ Custom Event Directive/Component Library
+# Angular 8+ Custom Events Library
 
-To build the library run `npm run packagr`
+[![Travis](https://travis-ci.org/acaprojects/ngx-custom-events.svg)](https://travis-ci.org/acaprojects/ngx-custom-events)
+[![npm version](https://badge.fury.io/js/%40acaprojects%2Fngx-custom-events.svg)](https://badge.fury.io/js/%40acaprojects%2Fngx-custom-events)
+[![david-dm](https://david-dm.org/acaprojects/ngx-custom-events.svg)](https://david-dm.org/acaprojects/ngx-custom-events)
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.0.
+
+## Development server
+
+Run `gulp serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+## Build
+
+Run `gulp build` to build the library. The build artifacts will be stored in the `dist/library` directory. Use the `--prod` flag for a production build.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 ## Installation
 
-You install the library from npm using `npm install @acaprojects/ngx-custom-events`
+You install the library from npm using `npm install @acaprojects/ngx-custom-events`;
