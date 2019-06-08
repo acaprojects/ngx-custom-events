@@ -4,7 +4,7 @@ declare global {
     }
 }
 
-export const LIB_NAME = 'Pipes';
+export const LIB_NAME = 'Custom Events';
 
 /**
  * Formatted console messages for the library
