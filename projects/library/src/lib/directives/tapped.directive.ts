@@ -109,8 +109,8 @@ export class TappedDirective implements AfterViewInit, OnDestroy {
         this.timer = setTimeout(() => {
             const start = this.start;
             const center = {
-                x: TouchEvent && event instanceof TouchEvent ? event.touches[0].clientX : (event as MouseEvent).clientX,
-                y: TouchEvent && event instanceof TouchEvent ? event.touches[0].clientY : (event as MouseEvent).clientY
+                x: window.TouchEvent && event instanceof TouchEvent ? event.touches[0].clientX : (event as MouseEvent).clientX,
+                y: window.TouchEvent && event instanceof TouchEvent ? event.touches[0].clientY : (event as MouseEvent).clientY
             };
             const distance = Math.sqrt(Math.pow(center.x - start.x, 2) + (center.y - start.y, 2));
             // Emit event if the distance is within the tolerence
