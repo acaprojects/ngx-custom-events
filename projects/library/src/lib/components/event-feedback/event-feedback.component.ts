@@ -1,5 +1,11 @@
 import { Component, ElementRef, Renderer2, AfterViewInit, Input, OnDestroy, HostListener } from '@angular/core';
 
+declare global {
+    interface Window {
+        TouchEvent: any;
+    }
+}
+
 @Component({
     selector: '[feedback]',
     templateUrl: `./event-feedback.component.html`,
@@ -32,7 +38,7 @@ export class EventFeedbackComponent implements AfterViewInit, OnDestroy {
     public handleMouse(e: MouseEvent) { this.handleEvent(e); }
 
     @HostListener('touchstart', ['$event'])
-    public handleTouch(e: TouchEvent) { this.handleEvent(e); }
+    public handleTouch(e: any) { this.handleEvent(e); }
 
     constructor(private element: ElementRef<HTMLElement>, private renderer: Renderer2) {}
 
@@ -64,11 +70,11 @@ export class EventFeedbackComponent implements AfterViewInit, OnDestroy {
      * Handle touchstart/mousedown event
      * @param event Event to handle
      */
-    private handleEvent(event: MouseEvent | TouchEvent) {
+    private handleEvent(event: any) {
         this.cancelled = false;
         const center = {
-            x: event instanceof TouchEvent ? event.touches[0].clientX : event.clientX,
-            y: event instanceof TouchEvent ? event.touches[0].clientY : event.clientY
+            x: window.TouchEvent && event instanceof TouchEvent ? event.touches[0].clientX : (event as MouseEvent).clientX,
+            y: window.TouchEvent && event instanceof TouchEvent ? event.touches[0].clientY : (event as MouseEvent).clientY
         };
         this.show = true;
         if (!this.cached_box) {
@@ -93,7 +99,7 @@ export class EventFeedbackComponent implements AfterViewInit, OnDestroy {
      * Handle touchend/mouseup event
      * @param event Event to handle
      */
-    private handleRelease(event: MouseEvent | TouchEvent) {
+    private handleRelease(event: any) {
         if (!this.transitioning) {
             this.show = false;
         } else {

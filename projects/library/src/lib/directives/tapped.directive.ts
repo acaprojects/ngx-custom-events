@@ -12,6 +12,13 @@ import { Directive, EventEmitter, ElementRef, Renderer2, AfterViewInit, OnDestro
 //     remove: (e, cb) => TappedDirective.remove(e, cb)
 // });
 
+
+declare global {
+    interface Window {
+        TouchEvent: any;
+    }
+}
+
 @Directive({
     selector: '[tapped] , [touchrelease]',
     outputs: ['tapped', 'touchrelease']
@@ -42,8 +49,8 @@ export class TappedDirective implements AfterViewInit, OnDestroy {
 
     public ngAfterViewInit(): void {
         if (this.el && this.el.nativeElement) {
-            this.mouse_listener = this.renderer.listen(this.el.nativeElement, 'mousedown', (e) => this.handleHold(e));
-            this.touch_listener = this.renderer.listen(this.el.nativeElement, 'touchstart', (e) => this.handleHold(e));
+            this.mouse_listener = this.renderer.listen(this.el.nativeElement, 'mousedown', e => this.handleHold(e));
+            this.touch_listener = this.renderer.listen(this.el.nativeElement, 'touchstart', e => this.handleHold(e));
         }
     }
 
@@ -78,32 +85,32 @@ export class TappedDirective implements AfterViewInit, OnDestroy {
      * Handle start of "tapped"/"touchrelease" event
      * @param event Start event object
      */
-    public handleHold(event: MouseEvent | TouchEvent) {
+    public handleHold(event: any) {
         const center = {
-            x: event instanceof TouchEvent ? event.touches[0].clientX : event.clientX,
-            y: event instanceof TouchEvent ? event.touches[0].clientY : event.clientY
+            x: window.TouchEvent && event instanceof TouchEvent ? event.touches[0].clientX : (event as MouseEvent).clientX,
+            y: window.TouchEvent && event instanceof TouchEvent ? event.touches[0].clientY : (event as MouseEvent).clientY
         };
         this.start = center;
-        this.mouse_listener = this.renderer.listen(window, 'mouseup', (e) => this.handleRelease(e));
-        this.touch_listener = this.renderer.listen(window, 'touchend', (e) => this.handleRelease(e));
+        this.mouse_listener = this.renderer.listen(window, 'mouseup', e => this.handleRelease(e));
+        this.touch_listener = this.renderer.listen(window, 'touchend', e => this.handleRelease(e));
         // Add timeout for ending the event
-        this.timer = <any>setTimeout(() => this.remove(), this.max_delay);
+        this.timer = setTimeout(() => this.remove(), this.max_delay) as any;
     }
 
     /**
      * Handle end of "tapped"/"touchrelease" event
      * @param event End event object
      */
-    public handleRelease(event: MouseEvent | TouchEvent) {
+    public handleRelease(event: any) {
         if (this.timer) {
             clearTimeout(this.timer);
             this.timer = null;
         }
-        this.timer = <any>setTimeout(() => {
+        this.timer = setTimeout(() => {
             const start = this.start;
             const center = {
-                x: event instanceof TouchEvent ? event.touches[0].clientX : event.clientX,
-                y: event instanceof TouchEvent ? event.touches[0].clientY : event.clientY
+                x: TouchEvent && event instanceof TouchEvent ? event.touches[0].clientX : (event as MouseEvent).clientX,
+                y: TouchEvent && event instanceof TouchEvent ? event.touches[0].clientY : (event as MouseEvent).clientY
             };
             const distance = Math.sqrt(Math.pow(center.x - start.x, 2) + (center.y - start.y, 2));
             // Emit event if the distance is within the tolerence
@@ -112,12 +119,12 @@ export class TappedDirective implements AfterViewInit, OnDestroy {
                     clearTimeout(this.event_timer);
                     this.event_timer = null;
                 }
-                this.event_timer = <any>setTimeout(() => {
+                this.event_timer = setTimeout(() => {
                     this.tapped.emit(event);
                     this.touchrelease.emit(event);
-                }, 100);
+                }, 100) as any;
             }
             this.start = { x: -999, y: -999 };
-        }, 50);
+        }, 50) as any;
     }
 }
