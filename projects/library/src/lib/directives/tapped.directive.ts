@@ -41,7 +41,6 @@ export class TappedDirective implements AfterViewInit, OnDestroy {
     constructor(private el: ElementRef, private renderer: Renderer2) {}
 
     public ngAfterViewInit(): void {
-        console.log('Init:', this.el);
         if (this.el && this.el.nativeElement) {
             this.mouse_listener = this.renderer.listen(this.el.nativeElement, 'mousedown', (e) => this.handleHold(e));
             this.touch_listener = this.renderer.listen(this.el.nativeElement, 'touchstart', (e) => this.handleHold(e));
@@ -80,7 +79,6 @@ export class TappedDirective implements AfterViewInit, OnDestroy {
      * @param event Start event object
      */
     public handleHold(event: MouseEvent | TouchEvent) {
-        console.log('Hold:', event);
         const center = {
             x: event instanceof TouchEvent ? event.touches[0].clientX : event.clientX,
             y: event instanceof TouchEvent ? event.touches[0].clientY : event.clientY
@@ -97,7 +95,6 @@ export class TappedDirective implements AfterViewInit, OnDestroy {
      * @param event End event object
      */
     public handleRelease(event: MouseEvent | TouchEvent) {
-        console.log('Release:', event);
         if (this.timer) {
             clearTimeout(this.timer);
             this.timer = null;
