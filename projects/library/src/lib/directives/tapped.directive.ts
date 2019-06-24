@@ -86,13 +86,14 @@ export class TappedDirective implements AfterViewInit, OnDestroy {
      * @param event Start event object
      */
     public handleHold(event: any) {
+        this.remove();
         const center = {
             x: window.TouchEvent && event instanceof TouchEvent ? event.touches[0].clientX : (event as MouseEvent).clientX,
             y: window.TouchEvent && event instanceof TouchEvent ? event.touches[0].clientY : (event as MouseEvent).clientY
         };
         this.start = center;
-        this.mouse_listener = this.renderer.listen(window, 'mouseup', e => this.handleRelease(e));
-        this.touch_listener = this.renderer.listen(window, 'touchend', e => this.handleRelease(e));
+        this.mouse_cancel = this.renderer.listen(window, 'mouseup', e => this.handleRelease(e));
+        this.touch_cancel = this.renderer.listen(window, 'touchend', e => this.handleRelease(e));
         // Add timeout for ending the event
         this.timer = setTimeout(() => this.remove(), this.max_delay) as any;
     }
@@ -120,6 +121,7 @@ export class TappedDirective implements AfterViewInit, OnDestroy {
                     this.event_timer = null;
                 }
                 this.event_timer = setTimeout(() => {
+                    this.remove();
                     this.tapped.emit(event);
                     this.touchrelease.emit(event);
                 }, 100) as any;
