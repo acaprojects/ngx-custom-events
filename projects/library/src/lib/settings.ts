@@ -17,7 +17,7 @@ export const LIB_NAME = 'Custom Events';
 export function log(type: string, msg: string, args?: any, out: string = 'debug', color?: string) {
     if (window.debug) {
         const clr = color ? color : '#009688';
-        const COLOURS = ['color: #0288D1', `color:${clr}`, 'color:rgba(0,0,0,0.87)'];
+        const COLOURS = ['color: #0288D1', `color:${clr}`, 'color:default'];
         if (args) {
             if (hasColours()) {
                 console[out](`%c[${LIB_NAME}]%c[${type}] %c${msg}`, ...COLOURS, args);
